@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Strona glowna</title>
+</head>
+<body>
+<p>
+    Strona glowna
+</p>
+<span sec:authorize="isAuthenticated()">
+    Uzytkownik: <span sec:authentication="name"></span> |
+    Role: <span sec:authentication="principal.authorities"></span> |
+</span>
+<br>
+<br>
+<div sec:authorize="hasRole('ADMIN')">
+    ROLE_ADMIN
+</div>
+<br>
+<div sec:authorize="hasRole('USER')">
+    ROLE_USER
+</div>
+<br>
+<div sec:authorize="hasRole('ADMIN')">
+    <div>
+        <a href="/registerPage" class="btn btn-primary" role="button" aria-pressed="true">
+            Zarejestruj
+        </a>
+    </div>
+</div>
+<br>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="WYLOGUJ"/>
+</form>
+
+</body>
+</html>
